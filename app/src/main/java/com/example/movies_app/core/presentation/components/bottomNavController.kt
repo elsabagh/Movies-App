@@ -1,7 +1,8 @@
 package com.example.movies_app.core.presentation.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Movie
 import androidx.compose.material.icons.rounded.Upcoming
@@ -18,7 +19,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.movies_app.R
 import com.example.movies_app.core.presentation.navgraph.Screen
@@ -45,46 +45,45 @@ fun BottomNavigationBar(
         mutableIntStateOf(0)
     }
 
-    NavigationBar(
-        modifier = Modifier.fillMaxWidth(),
-        MaterialTheme.colorScheme.inverseOnSurface,
-        tonalElevation = 10.dp
-    ) {
-        items.forEachIndexed { index, bottomItem ->
-            NavigationBarItem(selected = selected.intValue == index, onClick = {
-                selected.intValue = index
-                when (selected.intValue) {
-                    0 -> {
-                        onEvent(MovieListUiEvent.Navigate)
-                        bottomNavController.popBackStack()
-                        bottomNavController.navigate(Screen.PopularMovieList.route)
-                    }
+    NavigationBar {
+        Row(
+            modifier = Modifier.background(MaterialTheme.colorScheme.inverseOnSurface)
+        ) {
+            items.forEachIndexed { index, bottomItem ->
+                NavigationBarItem(selected = selected.intValue == index, onClick = {
+                    selected.intValue = index
+                    when (selected.intValue) {
+                        0 -> {
+                            onEvent(MovieListUiEvent.Navigate)
+                            bottomNavController.popBackStack()
+                            bottomNavController.navigate(Screen.PopularMovieList.route)
+                        }
 
-                    1 -> {
-                        onEvent(MovieListUiEvent.Navigate)
-                        bottomNavController.popBackStack()
-                        bottomNavController.navigate(Screen.UpcomingMovieList.route)
+                        1 -> {
+                            onEvent(MovieListUiEvent.Navigate)
+                            bottomNavController.popBackStack()
+                            bottomNavController.navigate(Screen.UpcomingMovieList.route)
+                        }
                     }
-                }
-            }, icon = {
-                Icon(
-                    imageVector = bottomItem.icon,
-                    contentDescription = bottomItem.title,
-                    tint = MaterialTheme.colorScheme.onBackground
-                )
-            }, label = {
-                Text(
-                    text = bottomItem.title, color = MaterialTheme.colorScheme.onBackground
-                )
-            },
-            )
+                }, icon = {
+                    Icon(
+                        imageVector = bottomItem.icon,
+                        contentDescription = bottomItem.title,
+                        tint = MaterialTheme.colorScheme.onBackground
+                    )
+                }, label = {
+                    Text(
+                        text = bottomItem.title, color = MaterialTheme.colorScheme.onBackground
+                    )
+                })
+            }
         }
     }
+
 }
 
-
 data class BottomItem(
-    val title: String, val icon: ImageVector,
+    val title: String, val icon: ImageVector
 )
 
 @Preview()
@@ -94,10 +93,10 @@ data class BottomItem(
 @Composable
 fun BottomNavigationBarPreview() {
     MoviesAppTheme {
-        BottomNavigationBar(NavHostController(LocalContext.current), {
+        BottomNavigationBar(NavHostController(LocalContext.current)
+        ) {
 
         }
-        )
     }
 }
 

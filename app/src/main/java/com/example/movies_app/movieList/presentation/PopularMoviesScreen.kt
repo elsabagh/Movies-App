@@ -8,18 +8,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.example.movies_app.movieList.domain.model.Movie
 import com.example.movies_app.movieList.presentation.componentes.MovieItem
 import com.example.movies_app.movieList.util.Category
-import com.example.movies_app.ui.theme.MoviesAppTheme
 
 @Composable
 fun PopularMoviesScreen(

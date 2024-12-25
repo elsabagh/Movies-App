@@ -44,7 +44,7 @@ fun UpcomingMoviesScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 if (index >= movieListState.upcomingMovieList.size - 1 && !movieListState.isLoading) {
-                    onEvent(MovieListUiEvent.Paginate(Category.POPULAR))
+                    onEvent(MovieListUiEvent.Paginate(Category.UPCOMING))
 
                 }
             }
